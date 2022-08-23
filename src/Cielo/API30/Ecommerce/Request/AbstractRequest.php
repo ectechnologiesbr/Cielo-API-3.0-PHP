@@ -16,6 +16,12 @@ abstract class AbstractRequest
     private $merchant;
     private $logger;
 
+    /**
+     * Parâmetros extras para o Curl
+     * Usar quando precisar setar configurações extras na requisição feita pela SDK
+     */
+    private static $extra_curl_params = [];
+
 	/**
 	 * AbstractSaleRequest constructor.
 	 *
@@ -26,6 +32,14 @@ abstract class AbstractRequest
     {
         $this->merchant = $merchant;
         $this->logger = $logger;
+    }
+
+	/**
+	 * Adiciona um parâmetro extras na requisição curl feita pela SDK
+	 */
+    public static function addExtraCurlParam($param, $value)
+    {
+        self::$extra_curl_params[$param] = $value;
     }
 
     /**
@@ -81,6 +95,11 @@ abstract class AbstractRequest
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        // parâmetros extras
+        foreach (self::$extra_curl_params as $param => $value) {
+            curl_setopt($curl, $param, $value);
+        }
 
         if ($this->logger !== null) {
             $this->logger->debug('Requisição', [

@@ -10,6 +10,17 @@ SDK para integração com a API da Cielo, com alterações feitas para uso da [E
 }
 ```
 
+## Alterações feitas:
+
+### Opção para adicionar parâmetros extras na requisição curl feita pela API:
+
+```php
+use Cielo\API30\Ecommerce\Request\AbstractRequest;
+
+AbstractRequest::addExtraCurlParam(CURLOPT_PROXYPORT, $proxy_porta);
+AbstractRequest::addExtraCurlParam(CURLOPT_PROXY, $proxy_endereco);
+```
+
 Readme original:
 
 ---
