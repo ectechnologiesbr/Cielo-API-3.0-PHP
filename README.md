@@ -1,3 +1,19 @@
+# CIELO API-3.0-PHP
+
+SDK para integração com a API da Cielo, com alterações feitas para uso da [Ellite Digital](https://www.ellitedigital.com.br/).
+
+## Instalar:
+
+```json
+"require": {
+    "ellitedigital/cielo-api-3.0-php": "dev-master"
+}
+```
+
+Readme original:
+
+---
+
 # API-3.0-PHP
 
 SDK API-3.0 PHP
