@@ -95,6 +95,7 @@ abstract class AbstractRequest
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_ENCODING, "gzip");
 
         // parâmetros extras
         foreach (self::$extra_curl_params as $param => $value) {

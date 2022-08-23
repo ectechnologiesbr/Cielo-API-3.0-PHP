@@ -21,7 +21,10 @@ AbstractRequest::addExtraCurlParam(CURLOPT_PROXYPORT, $proxy_porta);
 AbstractRequest::addExtraCurlParam(CURLOPT_PROXY, $proxy_endereco);
 ```
 
+#### Correções:
+
 * Correção do erro que ocorre quando a api retorna um JSON codificado duas vezes. [#221](https://github.com/DeveloperCielo/API-3.0-PHP/issues/221)
+* Adiciona suporte para gzip. [#203](https://github.com/DeveloperCielo/API-3.0-PHP/issues/203)
 
 Readme original:
 
