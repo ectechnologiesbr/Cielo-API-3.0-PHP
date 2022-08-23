@@ -12,7 +12,7 @@ SDK para integração com a API da Cielo, com alterações feitas para uso da [E
 
 ## Alterações feitas:
 
-### Opção para adicionar parâmetros extras na requisição curl feita pela API:
+#### Opção para adicionar parâmetros extras na requisição curl feita pela API:
 
 ```php
 use Cielo\API30\Ecommerce\Request\AbstractRequest;
@@ -20,6 +20,8 @@ use Cielo\API30\Ecommerce\Request\AbstractRequest;
 AbstractRequest::addExtraCurlParam(CURLOPT_PROXYPORT, $proxy_porta);
 AbstractRequest::addExtraCurlParam(CURLOPT_PROXY, $proxy_endereco);
 ```
+
+* Correção do erro que ocorre quando a api retorna um JSON codificado duas vezes. [#221](https://github.com/DeveloperCielo/API-3.0-PHP/issues/221)
 
 Readme original:
 
