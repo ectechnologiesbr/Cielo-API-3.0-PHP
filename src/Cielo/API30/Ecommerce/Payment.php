@@ -109,6 +109,12 @@ class Payment implements \JsonSerializable
     private $instructions;
 
     /**
+     * Dados originais populados da venda
+     * Usado para pegar valores que não estão disponíveis pelos getters
+     */
+    private $originalData;
+
+    /**
      * Payment constructor.
      *
      * @param int $amount
@@ -138,6 +144,7 @@ class Payment implements \JsonSerializable
      */
     public function populate(\stdClass $data)
     {
+        $this->originalData = $data;
 
         $this->serviceTaxAmount = isset($data->ServiceTaxAmount) ? $data->ServiceTaxAmount : null;
         $this->installments     = isset($data->Installments) ? $data->Installments : null;
@@ -201,7 +208,8 @@ class Payment implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return get_object_vars($this);
+        $vars = get_object_vars($this);
+        return $vars;
     }
 
     /**
@@ -1103,5 +1111,13 @@ class Payment implements \JsonSerializable
         $this->instructions = $instructions;
 
         return $this;
+    }
+
+    /**
+     * Retorna o objeto original do payment retornado pela Cielo
+     */
+    public function getOriginalData()
+    {
+        return $this->originalData;
     }
 }
