@@ -24,6 +24,8 @@ class Payment implements \JsonSerializable
 
     const PROVIDER_SIMULADO = 'Simulado';
 
+    const PAYMENTTYPE_PIX = 'Pix';
+
     private $serviceTaxAmount;
 
     private $installments;
@@ -107,6 +109,10 @@ class Payment implements \JsonSerializable
     private $identification;
 
     private $instructions;
+
+    private $qrCodeBase64Image;
+
+    private $qrCodeString;
 
     /**
      * Dados originais populados da venda
@@ -201,6 +207,9 @@ class Payment implements \JsonSerializable
         $this->demonstrative  = isset($data->Demonstrative) ? $data->Demonstrative : null;
         $this->identification = isset($data->Identification) ? $data->Identification : null;
         $this->instructions   = isset($data->Instructions) ? $data->Instructions : null;
+
+        $this->qrCodeBase64Image = isset($data->QrCodeBase64Image) ? $data->QrCodeBase64Image : null;
+        $this->qrCodeString      = isset($data->QrCodeString) ? $data->QrCodeString : null;
     }
 
     /**
@@ -1109,6 +1118,46 @@ class Payment implements \JsonSerializable
     public function setInstructions($instructions)
     {
         $this->instructions = $instructions;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQrCodeBase64Image()
+    {
+        return $this->qrCodeBase64Image;
+    }
+
+    /**
+     * @param $qrCodeBase64Image
+     *
+     * @return $this
+     */
+    public function setQrCodeBase64Image($qrCodeBase64Image)
+    {
+        $this->qrCodeBase64Image = $qrCodeBase64Image;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQrCodeString()
+    {
+        return $this->qrCodeString;
+    }
+
+    /**
+     * @param $qrCodeString
+     *
+     * @return $this
+     */
+    public function setQrCodeString($qrCodeString)
+    {
+        $this->qrCodeString = $qrCodeString;
 
         return $this;
     }
