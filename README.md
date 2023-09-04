@@ -20,6 +20,29 @@ use Cielo\API30\Ecommerce\Request\AbstractRequest;
 AbstractRequest::addExtraCurlParam(CURLOPT_PROXYPORT, $proxy_porta);
 AbstractRequest::addExtraCurlParam(CURLOPT_PROXY, $proxy_endereco);
 ```
+#### Meio de pagamento PIX:
+
+```php
+$venda->payment(intval(100))
+    ->setType(Payment::PAYMENTTYPE_PIX);
+
+// ou
+
+$payment->setType(Payment::PAYMENTTYPE_PIX);
+
+// e depois de processar o pagamento:
+
+$link = $result->getPayment()->getQrCodeString();
+$qrcode_base64 = $result->getPayment()->getQrCodeBase64Image();		
+```
+
+#### Opção para acessar o objeto `payment` retornado pela Cielo
+
+Útil para acessar o retorno da Cielo de variáveis que não estão acessíveis pelos métodos da classe.
+
+```php
+var_dump($result->getPayment()->getOriginalData());
+```
 
 #### Correções:
 
