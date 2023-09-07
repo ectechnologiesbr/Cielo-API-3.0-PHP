@@ -44,6 +44,17 @@ $qrcode_base64 = $result->getPayment()->getQrCodeBase64Image();
 var_dump($result->getPayment()->getOriginalData());
 ```
 
+#### Opção para setar `ExternalAuthentication` e `InitiatedTransactionIndicator` em pagamentos
+
+Essas opções são usadas em compras de cartão de débito.
+
+```php
+$payment
+    ->setInitiatedTransactionIndicator((object)array(...))
+    ->setExternalAuthentication((object)array(...));
+
+```
+
 #### Correções:
 
 * Correção do erro que ocorre quando a api retorna um JSON codificado duas vezes. [#221](https://github.com/DeveloperCielo/API-3.0-PHP/issues/221)

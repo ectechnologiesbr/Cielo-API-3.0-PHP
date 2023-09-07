@@ -114,6 +114,10 @@ class Payment implements \JsonSerializable
 
     private $qrCodeString;
 
+    private $externalAuthentication;
+
+    private $initiatedTransactionIndicator;
+
     /**
      * Dados originais populados da venda
      * Usado para pegar valores que não estão disponíveis pelos getters
@@ -210,6 +214,9 @@ class Payment implements \JsonSerializable
 
         $this->qrCodeBase64Image = isset($data->QrCodeBase64Image) ? $data->QrCodeBase64Image : null;
         $this->qrCodeString      = isset($data->QrCodeString) ? $data->QrCodeString : null;
+        
+        $this->externalAuthentication        = isset($data->ExternalAuthentication) ? $data->ExternalAuthentication : null;
+        $this->initiatedTransactionIndicator = isset($data->InitiatedTransactionIndicator) ? $data->InitiatedTransactionIndicator : null;
     }
 
     /**
@@ -218,6 +225,7 @@ class Payment implements \JsonSerializable
     public function jsonSerialize()
     {
         $vars = get_object_vars($this);
+        unset($vars['originalData']);
         return $vars;
     }
 
@@ -1158,6 +1166,46 @@ class Payment implements \JsonSerializable
     public function setQrCodeString($qrCodeString)
     {
         $this->qrCodeString = $qrCodeString;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExternalAuthentication()
+    {
+        return $this->externalAuthentication;
+    }
+
+    /**
+     * @param $externalAuthentication
+     *
+     * @return $this
+     */
+    public function setExternalAuthentication($externalAuthentication)
+    {
+        $this->externalAuthentication = $externalAuthentication;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInitiatedTransactionIndicator()
+    {
+        return $this->initiatedTransactionIndicator;
+    }
+
+    /**
+     * @param $initiatedTransactionIndicator
+     *
+     * @return $this
+     */
+    public function setInitiatedTransactionIndicator($initiatedTransactionIndicator)
+    {
+        $this->initiatedTransactionIndicator = $initiatedTransactionIndicator;
 
         return $this;
     }
