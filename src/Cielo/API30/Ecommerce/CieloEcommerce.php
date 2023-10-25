@@ -2,7 +2,9 @@
 
 namespace Cielo\API30\Ecommerce;
 
+use Cielo\API30\Ecommerce\Request\CieloRequestException;
 use Cielo\API30\Ecommerce\Request\CreateSaleRequest;
+use Cielo\API30\Ecommerce\Request\QueryBinRequest;
 use Cielo\API30\Ecommerce\Request\QueryRecurrentPaymentRequest;
 use Cielo\API30\Ecommerce\Request\QuerySaleRequest;
 use Cielo\API30\Ecommerce\Request\TokenizeCardRequest;
@@ -53,7 +55,7 @@ class CieloEcommerce
      *
      * @return Sale The Sale with authorization, tid, etc. returned by Cielo.
      *
-     * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException if anything gets wrong.
+     * @throws CieloRequestException if anything gets wrong.
      *
      * @see <a href=
      *      "https://developercielo.github.io/Webservice-3.0/english.html#error-codes">Error
@@ -74,7 +76,7 @@ class CieloEcommerce
      *
      * @return Sale The Sale with authorization, tid, etc. returned by Cielo.
      *
-     * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException if anything gets wrong.
+     * @throws CieloRequestException if anything gets wrong.
      *
      * @see <a href=
      *      "https://developercielo.github.io/Webservice-3.0/english.html#error-codes">Error
@@ -96,7 +98,7 @@ class CieloEcommerce
      * @return \Cielo\API30\Ecommerce\RecurrentPayment
      *            The RecurrentPayment with authorization, tid, etc. returned by Cielo.
      *
-     * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException if anything gets wrong.
+     * @throws CieloRequestException if anything gets wrong.
      *
      * @see <a href=
      *      "https://developercielo.github.io/Webservice-3.0/english.html#error-codes">Error
@@ -119,7 +121,7 @@ class CieloEcommerce
      *
      * @return Sale The Sale with authorization, tid, etc. returned by Cielo.
      *
-     * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException if anything gets wrong.
+     * @throws CieloRequestException if anything gets wrong.
      *
      * @see <a href=
      *      "https://developercielo.github.io/Webservice-3.0/english.html#error-codes">Error
@@ -149,7 +151,7 @@ class CieloEcommerce
      * @return \Cielo\API30\Ecommerce\Payment The captured Payment.
      *
      *
-     * @throws \Cielo\API30\Ecommerce\Request\CieloRequestException if anything gets wrong.
+     * @throws CieloRequestException if anything gets wrong.
      *
      * @see <a href=
      *      "https://developercielo.github.io/Webservice-3.0/english.html#error-codes">Error
@@ -175,5 +177,25 @@ class CieloEcommerce
         $tokenizeCardRequest = new TokenizeCardRequest($this->merchant, $this->environment, $this->logger);
 
         return $tokenizeCardRequest->execute($card);
+    }
+
+    /**
+     * Query a CardBin data on Cielo by card numbers.
+     *
+     * @param string $binNumber
+     *            The card bin number (first six or nine card numbers) to be queried
+     *
+     * @return CardBin|null The Card Bin data.
+     *
+     * @throws CieloRequestException if anything gets wrong.
+     *
+     * @see <a href="https://developercielo.github.io/manual/cielo-ecommerce#consulta-bin">Documentação Endpoint</a>
+     * @see <a href="https://developercielo.github.io/Webservice-3.0/english.html#error-codes">Error Codes</a>
+     */
+    public function getBinCard($binNumber)
+    {
+        $queryBinRequest = new QueryBinRequest($this->merchant, $this->environment, $this->logger);
+
+        return $queryBinRequest->execute($binNumber);
     }
 }
