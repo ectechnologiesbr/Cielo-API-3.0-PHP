@@ -4,6 +4,7 @@ namespace Cielo\API30\Ecommerce\Request;
 
 use Cielo\API30\Merchant;
 use Psr\Log\LoggerInterface;
+use stdClass;
 
 /**
  * Class AbstractSaleRequest
@@ -161,6 +162,13 @@ abstract class AbstractRequest
                 // portanto é necessário fazer json_decode novamente
                 if (!is_array($response) && !is_object($response) && $response) {
                     $response = json_decode($response);
+                }
+
+                if (is_null($response)) {
+                    $error = new stdClass();
+                    $error->Message = $responseBody;
+                    $error->Code = null;
+                    $response = [$error];
                 }
 
                 foreach ($response as $error) {
